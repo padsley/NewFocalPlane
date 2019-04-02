@@ -121,7 +121,9 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
     = new G4LogicalVolume(FP_box,ArgonGas,"Box_log",0,0,0);
   //
     G4RotationMatrix *rotation = new G4RotationMatrix();
-    rotation->rotateY(35*deg);
+    
+    //If you want to change the rotation for the central ray, this is the place to do it.
+    rotation->rotateY(-35*deg);
   fFPBox_phys
     = new G4PVPlacement(rotation,G4ThreeVector(0.,0.,1.*m),"Box_phys",
                         FP_log,fUniverse_phys,false,0);
