@@ -51,6 +51,7 @@ class PhysicsList: public G4VUserPhysicsList
     virtual void ConstructParticle();
     virtual void ConstructProcess(); 
     virtual void SetCuts();   
+    virtual void AddPhysicsList(const G4String& name);
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

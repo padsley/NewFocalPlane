@@ -50,6 +50,7 @@
 #include "GeometryConstruction.hh"
 #include "PhysicsList.hh"
 #include "ActionInitialization.hh"
+#include "FTFP_BERT.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo.....
 
@@ -69,6 +70,9 @@ int main(int argc,char** argv) {
   GeometryConstruction* detector = new GeometryConstruction;
   runManager->SetUserInitialization(detector);
   runManager->SetUserInitialization(new PhysicsList);
+  
+  G4VUserPhysicsList *physicsList = new FTFP_BERT;
+  runManager->SetUserInitialization(physicsList);
   
   runManager->SetUserInitialization(new ActionInitialization);
     

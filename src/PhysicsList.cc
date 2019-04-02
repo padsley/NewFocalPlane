@@ -43,6 +43,19 @@
 #include "G4BaryonConstructor.hh"
 #include "G4IonConstructor.hh"
 
+// Nuclei
+#include "G4Proton.hh"
+#include "G4Deuteron.hh"
+#include "G4Triton.hh"
+#include "G4Alpha.hh"
+#include "G4GenericIon.hh"
+
+#include "G4EmStandardPhysics.hh"
+
+#include "G4LossTableManager.hh"
+#include "G4UnitsTable.hh"
+#include "G4SystemOfUnits.hh"
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 PhysicsList::PhysicsList()
@@ -72,6 +85,12 @@ void PhysicsList::ConstructParticle()
 
   G4IonConstructor pIonConstructor;
   pIonConstructor.ConstructParticle();
+  
+  G4Proton::ProtonDefinition();
+  G4Deuteron::DeuteronDefinition();
+  G4Triton::TritonDefinition();
+  G4Alpha::AlphaDefinition();
+  G4GenericIon::GenericIonDefinition();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -79,6 +98,12 @@ void PhysicsList::ConstructParticle()
 void PhysicsList::ConstructProcess()
 {
   AddTransportation();
+}
+
+void PhysicsList::AddPhysicsList(const G4String& name)
+{
+    //Using a default option for the EM physics
+    G4cout << "Adding physics lists now" << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -120,7 +120,7 @@ void HistoManager::Book()
   analysis->CreateNtupleDColumn("weight");        //column 7
   analysis->FinishNtuple();
   
-  analysis->SetNtupleActivation(false);             
+  analysis->SetNtupleActivation(true);             
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

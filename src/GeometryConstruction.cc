@@ -50,9 +50,9 @@
 
 GeometryConstruction::GeometryConstruction()
 : G4VUserDetectorConstruction(),
-  fUniverse_phys(0),
+fUniverse_phys(0),
 //   fAl_phys(0),
-  fFPBox_phys(0)
+fFPBox_phys(0)
 //   fSphere_phys(0)
 {;}
 
@@ -65,80 +65,77 @@ GeometryConstruction::~GeometryConstruction()
 
 G4VPhysicalVolume* GeometryConstruction::Construct()
 {
-  //
-  //
-  // Define materials.
-  //
-  G4double a, z, density,pressure, temperature;
-  G4String name, symbol;
-
- 
-  density     = universe_mean_density;    //from PhysicalConstants.h
-  pressure    = 3.e-18*pascal;
-  temperature = 2.73*kelvin;
-  G4Material* Vacuum   = new G4Material("Vacuum",
-                                        1., 1.01*g/mole, density,
-                                        kStateGas,temperature,pressure);    
-  
-  //Molar mass of argon gas
-    a = 39.948*g/mole;    
+    //
+    //
+    // Define materials.
+    //
+    G4double a, z, density,pressure, temperature;
+    G4String name, symbol;
+    
+    
+    density     = universe_mean_density;    //from PhysicalConstants.h
+    pressure    = 3.e-18*pascal;
+    temperature = 2.73*kelvin;
+    G4Material* Vacuum   = new G4Material("Vacuum",
+                                          1., 1.01*g/mole, density,
+                                          kStateGas,temperature,pressure);    
+    
+    //Molar mass of argon gas
+    a = 39.948 * g/mole;    
     //Change this line if you want a different pressure
-    pressure = 1.*bar;
+    pressure = 1.e0*bar;
     
+    density = a * pressure / (Avogadro * k_Boltzmann * STP_Temperature);
+    G4cout << "density of argon gas = " << density / (g/cm3) << G4endl;
+    G4Material* ArgonGas = new G4Material(name="Argon", z=18., a, density);
     
-    density = 1.78 * g/L * pressure/bar;
-    G4cout << "density = " << density << G4endl;
-  G4Material* ArgonGas = new G4Material(name="Argon", z=18., a, density);
-  
-  //
-  // Define size of world and volumes in it.
-  //
-  G4double world_r = 200*cm;
-
-  G4double box_x = 100*cm;
-  G4double box_y = 10*cm;
-  G4double box_z = 60*mm;
-
-//   G4double sphere_r = 5*cm;
-
-  // Define bodies, logical volumes and physical volumes.
-  // First define the experimental hall.
-  //
-  G4Sphere * universe_s 
+    //
+    // Define size of world and volumes in it.
+    //
+    G4double world_r = 200*cm;
+    
+    G4double box_x = 100*cm;
+    G4double box_y = 10*cm;
+    G4double box_z = 60*mm;
+    
+    // Define bodies, logical volumes and physical volumes.
+    // First define the experimental hall.
+    //
+    G4Sphere * universe_s 
     = new G4Sphere("universe_s", 0, world_r, 0, twopi, 0, pi);
-  G4LogicalVolume * universe_log
+    G4LogicalVolume * universe_log
     = new G4LogicalVolume(universe_s,Vacuum,"universe_L",0,0,0);
-  //
-  fUniverse_phys
+    //
+    fUniverse_phys
     = new G4PVPlacement(0,G4ThreeVector(),"universe_P",
                         universe_log,0,false,0);
-                        
-  //define a the focal plane box
-  //
-  G4Box * FP_box
+    
+    //define the focal plane box
+    //
+    G4Box * FP_box
     = new G4Box("FP_box", box_x, box_y, box_z);
-  G4LogicalVolume * FP_log
+    G4LogicalVolume * FP_log
     = new G4LogicalVolume(FP_box,ArgonGas,"Box_log",0,0,0);
-  //
+    //
     G4RotationMatrix *rotation = new G4RotationMatrix();
     
     //If you want to change the rotation for the central ray, this is the place to do it.
     rotation->rotateY(-35*deg);
-  fFPBox_phys
+    fFPBox_phys
     = new G4PVPlacement(rotation,G4ThreeVector(0.,0.,1.*m),"Box_phys",
                         FP_log,fUniverse_phys,false,0);
-
-
-  
-//--------- Visualization attributes -------------------------------
-  universe_log->SetVisAttributes(G4VisAttributes::Invisible);
-  G4VisAttributes* aVisAtt= new G4VisAttributes(G4Colour(0,1.0,1.0));
-//   Al_log->SetVisAttributes(aVisAtt);
-  FP_log->SetVisAttributes(aVisAtt);
-//   G4VisAttributes* bVisAtt= new G4VisAttributes(G4Colour(1.0,2.0,.0));
-//   aSphere_log->SetVisAttributes(bVisAtt);
-
-  return fUniverse_phys;
+    
+    
+    
+    //--------- Visualization attributes -------------------------------
+    universe_log->SetVisAttributes(G4VisAttributes::Invisible);
+    G4VisAttributes* aVisAtt= new G4VisAttributes(G4Colour(0,1.0,1.0));
+    //   Al_log->SetVisAttributes(aVisAtt);
+    FP_log->SetVisAttributes(aVisAtt);
+    //   G4VisAttributes* bVisAtt= new G4VisAttributes(G4Colour(1.0,2.0,.0));
+    //   aSphere_log->SetVisAttributes(bVisAtt);
+    
+    return fUniverse_phys;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
