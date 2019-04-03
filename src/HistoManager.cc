@@ -109,7 +109,7 @@ void HistoManager::Book()
   //
   analysis->SetNtupleDirectoryName("ntuple");
   analysis->SetFirstNtupleId(1);       
-  analysis->CreateNtuple("101", "Primary Particle Tuple");
+  analysis->CreateNtuple("ParticleInfo", "Primary Particle Tuple");
   analysis->CreateNtupleIColumn("particleID");    //column 0
   analysis->CreateNtupleDColumn("Ekin");          //column 1
   analysis->CreateNtupleDColumn("posX");          //column 2

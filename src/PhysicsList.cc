@@ -60,7 +60,9 @@
 
 PhysicsList::PhysicsList()
 : G4VUserPhysicsList()
-{ }
+{
+    SetCuts();
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -110,7 +112,10 @@ void PhysicsList::AddPhysicsList(const G4String& name)
 
 void PhysicsList::SetCuts()
 {
- SetCutsWithDefault(); 
+    G4cout << "Set Cuts" << G4endl;
+    SetCutsWithDefault(); 
+    G4VUserPhysicsList::SetCuts();
+    DumpCutValuesTable();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

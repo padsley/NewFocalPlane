@@ -76,6 +76,8 @@ int main(int argc,char** argv) {
   
   runManager->SetUserInitialization(new ActionInitialization);
     
+  physicsList->SetCuts();
+  
 #ifdef G4VIS_USE
   // visualization manager
   G4VisManager* visManager = new G4VisExecutive;
