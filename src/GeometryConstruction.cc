@@ -44,6 +44,7 @@
 #include "G4Colour.hh"
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4Transform3D.hh"
 
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
@@ -80,6 +81,24 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
                                           1., 1.01*g/mole, density,
                                           kStateGas,temperature,pressure);    
     
+    // Mylar
+    
+    a = 1.01*g/mole;
+      G4Element* elH  = new G4Element(name="Hydrogen",symbol="H" , z= 1., a);
+   
+   a = 12.01*g/mole;
+      G4Element* elC = new G4Element(name="Carbon", symbol="C", z=6., a);
+    
+      a = 16.00*g/mole;
+      G4Element* elO  = new G4Element(name="Oxygen"  ,symbol="O" , z= 8., a);
+      
+     density = 1.39*g/cm3;
+     G4Material* Mylar = new G4Material(name="Mylar", density, 3);
+     Mylar->AddElement(elO,2);
+     Mylar->AddElement(elC,5);
+   Mylar->AddElement(elH,4);
+  
+   
     //Molar mass of argon gas
     a = 39.948 * g/mole;    
     //Change this line if you want a different pressure
@@ -94,9 +113,11 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
     //
     G4double world_r = 200*cm;
     
-    G4double box_x = 100*cm;
-    G4double box_y = 10*cm;
-    G4double box_z = 60*mm;
+    G4double box_x = 0.5*220*mm;
+    G4double box_y = 0.5*100*mm;
+    G4double box_z = 0.5*10*mm; //Make 10-mm slices for the detectors
+    G4int NumberOfFPSlices = 10;
+    G4double rotationAngle = -35*deg;
     
     // Define bodies, logical volumes and physical volumes.
     // First define the experimental hall.
@@ -110,6 +131,10 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
     = new G4PVPlacement(0,G4ThreeVector(),"universe_P",
                         universe_log,0,false,0);
     
+    //Define the assembly volume which contains all of the parts of the focal-plane detector
+//     G4LogicalVolume *CompleteFocalPlane_log = new G4LogicalVolume();
+//     G4AssemblyVolume *CompleteFocalPlane = new G4AssemblyVolume();
+    
     //define the focal plane box
     //
     G4Box * FP_box
@@ -117,14 +142,36 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
     G4LogicalVolume * FP_log
     = new G4LogicalVolume(FP_box,ArgonGas,"Box_log",0,0,0);
     //
+    
+    //mylar entrance foil definition
+    G4Box * EntranceFoil = new G4Box("EntranceFoil", box_x, box_y, 1.5/1000. *mm);
+    G4LogicalVolume *EntranceFoil_log = new G4LogicalVolume(EntranceFoil,Mylar,"EntranceFoil_log",0,0,0);
+    
     G4RotationMatrix *rotation = new G4RotationMatrix();
-    
     //If you want to change the rotation for the central ray, this is the place to do it.
-    rotation->rotateY(-35*deg);
-    fFPBox_phys
-    = new G4PVPlacement(rotation,G4ThreeVector(0.,0.,1.*m),"Box_phys",
-                        FP_log,fUniverse_phys,false,0);
+    rotation->rotateY(rotationAngle);
     
+    for(G4int i=0;i<NumberOfFPSlices;i++)
+    {
+    
+        char buffer[256];
+        sprintf(buffer,"Box_phys_%d",i);
+        
+    fFPBox_phys
+    = new G4PVPlacement(0,G4ThreeVector(0.,0.,1.*m + ((double)i-(double)NumberOfFPSlices/2.)*2.*box_z),
+                        buffer,
+                        FP_log,fUniverse_phys,
+                        false,
+                        0);
+    }
+    
+    
+    fEntranceFoil_phys = new G4PVPlacement(0,G4ThreeVector(0.,0.,1.*m - NumberOfFPSlices*box_z),
+                                           "EntranceFoil_phys",
+                                           EntranceFoil_log,
+                                           fUniverse_phys,
+                                           false,
+                                           0);
     
     
     //--------- Visualization attributes -------------------------------
@@ -132,6 +179,7 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
     G4VisAttributes* aVisAtt= new G4VisAttributes(G4Colour(0,1.0,1.0));
     //   Al_log->SetVisAttributes(aVisAtt);
     FP_log->SetVisAttributes(aVisAtt);
+    EntranceFoil_log->SetVisAttributes(G4VisAttributes::solid);
     //   G4VisAttributes* bVisAtt= new G4VisAttributes(G4Colour(1.0,2.0,.0));
     //   aSphere_log->SetVisAttributes(bVisAtt);
     

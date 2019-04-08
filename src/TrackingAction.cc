@@ -48,6 +48,7 @@ TrackingAction::TrackingAction()
 
 void TrackingAction::PreUserTrackingAction(const G4Track* track)
 {
+    G4String name         = track->GetDynamicParticle()->GetParticleDefinition()->GetParticleName();
   G4int pid               = track->GetDynamicParticle()->GetPDGcode();
   G4double ekin           = track->GetKineticEnergy();
   G4ThreeVector vertex    = track->GetPosition();
@@ -85,6 +86,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   analysisManager->FillNtupleDColumn(5,theta);
   analysisManager->FillNtupleDColumn(6,phi);
   analysisManager->FillNtupleDColumn(7,weight);
+  analysisManager->FillNtupleSColumn(8,name);
   analysisManager->AddNtupleRow();  
 }
 

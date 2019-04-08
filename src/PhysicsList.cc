@@ -113,9 +113,8 @@ void PhysicsList::AddPhysicsList(const G4String& name)
 void PhysicsList::SetCuts()
 {
     G4cout << "Set Cuts" << G4endl;
-    SetCutsWithDefault(); 
-    G4VUserPhysicsList::SetCuts();
-    DumpCutValuesTable();
+    SetCutValue(defaultCutValue, "gamma");
+    SetCutValue(defaultCutValue, "e-");
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

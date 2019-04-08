@@ -54,6 +54,7 @@ class GeometryConstruction : public G4VUserDetectorConstruction
     G4VPhysicalVolume* fAl_phys;
     G4VPhysicalVolume* fSphere_phys;
     G4VPhysicalVolume* fFPBox_phys;
+    G4VPhysicalVolume* fEntranceFoil_phys;
 };
     
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

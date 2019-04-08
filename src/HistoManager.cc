@@ -118,6 +118,7 @@ void HistoManager::Book()
   analysis->CreateNtupleDColumn("dirTheta");      //column 5
   analysis->CreateNtupleDColumn("dirPhi");        //column 6
   analysis->CreateNtupleDColumn("weight");        //column 7
+  analysis->CreateNtupleSColumn("name");          //column 8
   analysis->FinishNtuple();
   
   analysis->SetNtupleActivation(true);             
