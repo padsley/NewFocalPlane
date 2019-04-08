@@ -158,7 +158,7 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
         sprintf(buffer,"Box_phys_%d",i);
         
     fFPBox_phys
-    = new G4PVPlacement(0,G4ThreeVector(0.,0.,1.*m + ((double)i-(double)NumberOfFPSlices/2.)*2.*box_z),
+    = new G4PVPlacement(G4Transform3D(*rotation,G4ThreeVector(0.,0.,1.*m + ((double)i-(double)NumberOfFPSlices/2.)*2.*box_z)),
                         buffer,
                         FP_log,fUniverse_phys,
                         false,
@@ -166,7 +166,7 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
     }
     
     
-    fEntranceFoil_phys = new G4PVPlacement(0,G4ThreeVector(0.,0.,1.*m - NumberOfFPSlices*box_z),
+    fEntranceFoil_phys = new G4PVPlacement(G4Transform3D(*rotation,G4ThreeVector(0.,0.,1.*m - NumberOfFPSlices*box_z)),
                                            "EntranceFoil_phys",
                                            EntranceFoil_log,
                                            fUniverse_phys,
