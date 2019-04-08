@@ -61,6 +61,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   G4double cost = std::cos(theta);
   
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+  G4Ntuple *ntuple = analysisManager->GetNtuple(0);
     
   G4double r = vertex.mag();
   G4double dr = analysisManager->GetH1Width(2);
@@ -78,16 +79,16 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   analysisManager->FillH2(5,phi,theta);
   
   // fill ntuple  
-  analysisManager->FillNtupleIColumn(0,pid);
-  analysisManager->FillNtupleDColumn(1,ekin);
-  analysisManager->FillNtupleDColumn(2,x);
-  analysisManager->FillNtupleDColumn(3,y);
-  analysisManager->FillNtupleDColumn(4,z);
-  analysisManager->FillNtupleDColumn(5,theta);
-  analysisManager->FillNtupleDColumn(6,phi);
-  analysisManager->FillNtupleDColumn(7,weight);
-  analysisManager->FillNtupleSColumn(8,name);
-  analysisManager->AddNtupleRow();  
+  analysisManager->FillNtupleIColumn(0,0,pid);
+  analysisManager->FillNtupleDColumn(0,1,ekin);
+  analysisManager->FillNtupleDColumn(0,2,x);
+  analysisManager->FillNtupleDColumn(0,3,y);
+  analysisManager->FillNtupleDColumn(0,4,z);
+  analysisManager->FillNtupleDColumn(0,5,theta);
+  analysisManager->FillNtupleDColumn(0,6,phi);
+  analysisManager->FillNtupleDColumn(0,7,weight);
+  analysisManager->FillNtupleSColumn(0,8,name);
+  analysisManager->AddNtupleRow(0);  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....

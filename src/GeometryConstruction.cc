@@ -111,7 +111,7 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
     //
     // Define size of world and volumes in it.
     //
-    G4double world_r = 200*cm;
+    G4double world_r = 2000*cm;
     
     G4double box_x = 0.5*220*mm;
     G4double box_y = 0.5*100*mm;

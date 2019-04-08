@@ -112,9 +112,10 @@ void PhysicsList::AddPhysicsList(const G4String& name)
 
 void PhysicsList::SetCuts()
 {
-    G4cout << "Set Cuts" << G4endl;
+    defaultCutValue = 0.1 * mm;
     SetCutValue(defaultCutValue, "gamma");
     SetCutValue(defaultCutValue, "e-");
+    SetCutValue(defaultCutValue, "e+");
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

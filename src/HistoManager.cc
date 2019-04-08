@@ -108,18 +108,25 @@ void HistoManager::Book()
   // nTuples
   //
   analysis->SetNtupleDirectoryName("ntuple");
-  analysis->SetFirstNtupleId(1);       
+  analysis->SetFirstNtupleId(0);       
   analysis->CreateNtuple("ParticleInfo", "Primary Particle Tuple");
-  analysis->CreateNtupleIColumn("particleID");    //column 0
-  analysis->CreateNtupleDColumn("Ekin");          //column 1
-  analysis->CreateNtupleDColumn("posX");          //column 2
-  analysis->CreateNtupleDColumn("posY");          //column 3
-  analysis->CreateNtupleDColumn("posZ");          //column 4
-  analysis->CreateNtupleDColumn("dirTheta");      //column 5
-  analysis->CreateNtupleDColumn("dirPhi");        //column 6
-  analysis->CreateNtupleDColumn("weight");        //column 7
-  analysis->CreateNtupleSColumn("name");          //column 8
-  analysis->FinishNtuple();
+  analysis->CreateNtupleIColumn(0,"particleID");    //column 0
+  analysis->CreateNtupleDColumn(0,"Ekin");          //column 1
+  analysis->CreateNtupleDColumn(0,"posX");          //column 2
+  analysis->CreateNtupleDColumn(0,"posY");          //column 3
+  analysis->CreateNtupleDColumn(0,"posZ");          //column 4
+  analysis->CreateNtupleDColumn(0,"dirTheta");      //column 5
+  analysis->CreateNtupleDColumn(0,"dirPhi");        //column 6
+  analysis->CreateNtupleDColumn(0,"weight");        //column 7
+  analysis->CreateNtupleSColumn(0,"name");          //column 8
+  analysis->FinishNtuple(0);
+  
+  //nTuple for tracking
+  analysis->CreateNtuple("TrackInfo", "Track of particle behaviour");
+  analysis->CreateNtupleDColumn(1,"KineticEnergy");
+  analysis->CreateNtupleDColumn(1,"Depth");
+  analysis->CreateNtupleDColumn(1,"PosStrag");
+  analysis->FinishNtuple(1);
   
   analysis->SetNtupleActivation(true);             
 }
