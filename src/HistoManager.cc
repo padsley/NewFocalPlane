@@ -126,6 +126,12 @@ void HistoManager::Book()
   analysis->CreateNtupleDColumn(1,"KineticEnergy");
   analysis->CreateNtupleDColumn(1,"Depth");
   analysis->CreateNtupleDColumn(1,"PosStrag");
+  analysis->CreateNtupleDColumn(1,"X");
+  analysis->CreateNtupleDColumn(1,"Y");
+  analysis->CreateNtupleDColumn(1,"Z");
+  analysis->CreateNtupleDColumn(1,"Xprime");
+  analysis->CreateNtupleDColumn(1,"Yprime");
+  analysis->CreateNtupleDColumn(1,"Zprime");
   analysis->FinishNtuple(1);
   
   analysis->SetNtupleActivation(true);             

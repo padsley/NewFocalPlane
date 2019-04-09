@@ -1,0 +1,32 @@
+/run/initialize
+
+/process/list
+#
+/gps/verbose 0
+#Protons as the particles
+/gps/ion 28 16 8 0
+#
+
+#
+# the beam energy is mono-energetic at 50 MeV
+/gps/ene/mono 50 MeV
+
+#Set the direction of the initial beam
+/gps/direction 0 0 1
+#
+# commands below are independent of gps
+#
+/analysis/setFileName exgpsO16_50MeV
+/analysis/h1/set 1 100 0 100 MeV
+/analysis/h2/setX 2 100 -10 10 cm  #y-z
+/analysis/h2/setY 2 100 -10 10 cm  #y-z
+/analysis/ntuple/setActivation 1 true
+#
+/run/printProgress 10000
+#
+#/tracking/verbose 1
+#
+#/control/execute vis.mac
+#
+/run/beamOn 100000
+

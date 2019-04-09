@@ -116,7 +116,7 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
     G4double box_x = 0.5*220*mm;
     G4double box_y = 0.5*100*mm;
     G4double box_z = 0.5*10*mm; //Make 10-mm slices for the detectors
-    G4int NumberOfFPSlices = 10;
+    G4int NumberOfFPSlices = 100;
     G4double rotationAngle = -35*deg;
     
     // Define bodies, logical volumes and physical volumes.
