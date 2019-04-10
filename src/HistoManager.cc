@@ -123,15 +123,16 @@ void HistoManager::Book()
   
   //nTuple for tracking
   analysis->CreateNtuple("TrackInfo", "Track of particle behaviour");
-  analysis->CreateNtupleDColumn(1,"KineticEnergy");
-  analysis->CreateNtupleDColumn(1,"Depth");
-  analysis->CreateNtupleDColumn(1,"PosStrag");
-  analysis->CreateNtupleDColumn(1,"X");
-  analysis->CreateNtupleDColumn(1,"Y");
-  analysis->CreateNtupleDColumn(1,"Z");
-  analysis->CreateNtupleDColumn(1,"Xprime");
-  analysis->CreateNtupleDColumn(1,"Yprime");
-  analysis->CreateNtupleDColumn(1,"Zprime");
+  analysis->CreateNtupleDColumn(1,"KineticEnergy"); //0
+  analysis->CreateNtupleDColumn(1,"Depth"); //1
+  analysis->CreateNtupleDColumn(1,"PosStrag"); //2
+  analysis->CreateNtupleDColumn(1,"X"); //3
+  analysis->CreateNtupleDColumn(1,"Y"); //4 
+  analysis->CreateNtupleDColumn(1,"Z"); //5 
+  analysis->CreateNtupleDColumn(1,"Xprime"); //6 
+  analysis->CreateNtupleDColumn(1,"Yprime"); //7
+  analysis->CreateNtupleDColumn(1,"Zprime"); //8
+//   analysis->CreateNtupleSColumn(1,"ParticleName"); //9
   analysis->FinishNtuple(1);
   
   analysis->SetNtupleActivation(true);             
