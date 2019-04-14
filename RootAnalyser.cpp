@@ -40,4 +40,6 @@ void RootAnalyser()
         if(i==0)EnergyLoss[i]->Draw();
         else EnergyLoss[i]->Draw("same");
     }
+    
+    TFile *foutput = new TFile("OneAtmosphere.root","RECREATE");
 }

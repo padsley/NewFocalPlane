@@ -102,7 +102,7 @@ G4VPhysicalVolume* GeometryConstruction::Construct()
     //Molar mass of argon gas
     a = 39.948 * g/mole;    
     //Change this line if you want a different pressure
-    pressure = 1.e0*bar;
+    pressure = 1.e-3*bar;
     
     density = a * pressure / (Avogadro * k_Boltzmann * STP_Temperature);
     G4cout << "density of argon gas = " << density / (g/cm3) << G4endl;
