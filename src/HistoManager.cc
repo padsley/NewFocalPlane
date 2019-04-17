@@ -132,7 +132,7 @@ void HistoManager::Book()
   analysis->CreateNtupleDColumn(1,"Xprime"); //6 
   analysis->CreateNtupleDColumn(1,"Yprime"); //7
   analysis->CreateNtupleDColumn(1,"Zprime"); //8
-//   analysis->CreateNtupleSColumn(1,"ParticleName"); //9
+  analysis->CreateNtupleSColumn(1,"ParticleName"); //9
   analysis->FinishNtuple(1);
   
   analysis->SetNtupleActivation(true);             

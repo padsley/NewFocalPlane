@@ -16,7 +16,7 @@
 #
 # commands below are independent of gps
 #
-/analysis/setFileName exgpsLi750MeV
+/analysis/setFileName exgpsLi7
 /analysis/h1/set 1 100 0 100 MeV
 /analysis/h2/setX 2 100 -10 10 cm  #y-z
 /analysis/h2/setY 2 100 -10 10 cm  #y-z

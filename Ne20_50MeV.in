@@ -4,7 +4,7 @@
 #
 /gps/verbose 0
 #Protons as the particles
-/gps/ion 2 3 2 0
+/gps/ion 10 20 10 0
 #
 
 #
@@ -16,13 +16,13 @@
 #
 # commands below are independent of gps
 #
-/analysis/setFileName exgpsHe3
+/analysis/setFileName exgpsO16
 /analysis/h1/set 1 100 0 100 MeV
 /analysis/h2/setX 2 100 -10 10 cm  #y-z
 /analysis/h2/setY 2 100 -10 10 cm  #y-z
 /analysis/ntuple/setActivation 1 true
 #
-/run/printProgress 10000
+/run/printProgress 1000
 #
 #/tracking/verbose 1
 #

@@ -39,16 +39,16 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
         
         G4double Zedd0 = 1*m;
         
-        analysisManager->FillNtupleDColumn(1,0,KineticEnergy);
-        analysisManager->FillNtupleDColumn(1,1,position.getZ());
-        analysisManager->FillNtupleDColumn(1,2,sqrt(pow(position.getX(),2.)+pow(position.getY(),2.)));
-        analysisManager->FillNtupleDColumn(1,3,position.getX());
-        analysisManager->FillNtupleDColumn(1,4,position.getY());
-        analysisManager->FillNtupleDColumn(1,5,position.getZ());
-        analysisManager->FillNtupleDColumn(1,6,position.getX()*cos(RotationAngle) + (position.getZ() - Zedd0)*sin(RotationAngle));//This is xprime
-        analysisManager->FillNtupleDColumn(1,7,position.getY()); //No rotation in the Y direction so it doesn't change the Y coordinate
-        analysisManager->FillNtupleDColumn(1,8,-1*position.getX()*sin(RotationAngle) + (position.getZ() - Zedd0) * cos(RotationAngle));;
-//         analysisManager->FillNtupleSColumn(1,9,aStep->GetDynamicParticle()->GetParticleDefinition()->GetParticleName());
+        analysisManager->FillNtupleDColumn(1,0,KineticEnergy / MeV);
+        analysisManager->FillNtupleDColumn(1,1,position.getZ() / mm);
+        analysisManager->FillNtupleDColumn(1,2,(sqrt(pow(position.getX(),2.)+pow(position.getY(),2.))) / mm);
+        analysisManager->FillNtupleDColumn(1,3,position.getX() / mm);
+        analysisManager->FillNtupleDColumn(1,4,position.getY() / mm);
+        analysisManager->FillNtupleDColumn(1,5,position.getZ() / mm);
+        analysisManager->FillNtupleDColumn(1,6,(position.getX()*cos(RotationAngle) + (position.getZ() - Zedd0)*sin(RotationAngle)) / mm);//This is xprime
+        analysisManager->FillNtupleDColumn(1,7,position.getY()/ mm); //No rotation in the Y direction so it doesn't change the Y coordinate
+        analysisManager->FillNtupleDColumn(1,8,(-1*position.getX()*sin(RotationAngle) + (position.getZ() - Zedd0) * cos(RotationAngle)) / mm);
+        analysisManager->FillNtupleSColumn(1,9,aStep->GetTrack()->GetParticleDefinition()->GetParticleName());
         
         analysisManager->AddNtupleRow(1);  
     }
